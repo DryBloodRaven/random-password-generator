@@ -13,13 +13,7 @@ function writePassword() {
 
 }
 
-// GIVEN I need a new, secure password
-// WHEN I click the button to generate a password
-// THEN I am presented with a series of prompts for password criteria
-// WHEN prompted for password criteria
-// THEN I select which criteria to include in the password
-// WHEN prompted for the length of the password
-// THEN I choose a length of at least 8 characters and no more than 128 characters
+
 // WHEN prompted for character types to include in the password
 // THEN I choose lowercase, uppercase, numeric, and/or special characters
 // WHEN I answer each prompt
@@ -30,27 +24,42 @@ function writePassword() {
 // THEN the password is either displayed in an alert or written to the page
 
 
+var lowerChar = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var upperChar = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var numberChar = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var specialChar = [" ", "!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", ">", "?", "@", "[", "]", "^", "_", "`", "{", "|", "}", "~"];
+
 function generatePassword() {
   // Generate password length. need to validate that it is between 8 and 128
-  var passwordLength = window.prompt("How many characters would you like your password to contain?","8");
-  console.log("passwordLength", passwordLength, typeof passwordLength);
+  passwordLength = window.prompt("How many characters would you like you password to contain?", "8");
+  // Validate response
+  if (passwordLength < 8 || passwordLength > 128) {
+    window.alert("Invalid character length. Please choose a number between 8 and 128. Thank you.");
+    return generatePassword();
+  }
+  if (Number.isNaN(passwordLength)) {
+    window.alert("Invalid format. Please choose a number between 8 and 128. Thank you.");
+    return generatePassword();
+  }
 
-  // confrim use of special characters.
-  var specialChar = window.confirm("Click OK to confirm including special characters.");
-  console.log("specialChar", specialChar, typeof specialChar);
+  // Select character parameters
+  var specialConfirm = window.confirm("Click OK to confirm including special characters.");
 
-  // confrim use of numeric characters.
-  var numberChar = window.confirm("Click OK to confirm including numeric characters.");
-  console.log("numberChar", numberChar, typeof numberChar);
+  var numberConfirm = window.confirm("Click OK to confirm including numeric characters.");
 
-  // confirm use of lowercase characters.
-  var lowerChar = window.confirm("Click OK to confirm including lowercase characters.");
-  console.log("lowerChar", lowerChar, typeof lowerChar);
+  var lowerConfirm = window.confirm("Click OK to confirm including lowercase characters.");
 
-  //  confrim use of uppercase characters.
-  var upperChar = window.confirm("Click OK to confirm including uppercase characters.");
-  console.log("upperChar", upperChar, typeof upperChar);
+  var upperConfirm = window.confirm("Click OK to confirm including uppercase characters.");
+
+  // Validate that at least 1 character parameter was selected
+  if (!specialConfirm && !numberConfirm && !lowerConfirm && !upperConfirm) {
+    window.alert("Invlaid selection. You must include at least 1 character type");
+    return generatePassword();
+  }
 }
+
+
+generatePassword();
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
