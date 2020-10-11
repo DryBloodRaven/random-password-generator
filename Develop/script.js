@@ -13,23 +13,14 @@ function writePassword() {
 
 }
 
-
-
-// WHEN I answer each prompt
-// THEN my input should be validated and at least one character type should be selected
-// WHEN all prompts are answered
-// THEN a password is generated that matches the selected criteria
-// WHEN the password is generated
-// THEN the password is either displayed in an alert or written to the page
-
-
+// Created 4 arrays. One for lowercase characters, uppercase characters, number characters and special characters.
 var lowerChar = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var upperChar = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var numberChar = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var specialChar = [" ", "!", '"', "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", "<", ">", "?", "@", "[", "]", "^", "_", "`", "{", "|", "}", "~"];
 
 function generatePassword() {
-  debugger;
+  //debugger;
   // Generate password length. need to validate that it is between 8 and 128
   passwordLength = window.prompt("How many characters would you like you password to contain?", "8");
 
@@ -81,14 +72,13 @@ function generatePassword() {
   // Created new variable for the password that will be generated
   var generatedPassword = "";
 
-  // TOSO: Getting stuck in a loop and not stopping at the correct password length
-  for (var i = 0; i = passwordLength; i++) {
+  // TODO: Getting stuck in a loop and not stopping at the correct password length
+  for (var i = 0; i < passwordLength; i++) {
     generatedPassword = generatedPassword + combinedChar[Math.floor(Math.random() * combinedChar.length)];
-    console.log(generatePassword);
+    console.log(generatedPassword);
   };
 
   return generatedPassword;
-
 }
 
 // Add event listener to generate button
